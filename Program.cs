@@ -49,15 +49,95 @@ string DecToHex(int num, int Base)
     return result;
 }
 
-Console.Write("Input a number to convert: ");
-int number = Convert.ToInt32(Console.ReadLine());
-Console.Write("Input a base (2, 8, 16): ");
-int basement = Convert.ToInt32(Console.ReadLine());
+double ToDecimal(string num, int Base)
+{
+    double result = 0;
+    int degrees = num.Length - 1;
+    if(Base == 2 || Base == 8)
+    {
+        for(int i = 0; i < num.Length; i++)
+        {
+            result += char.GetNumericValue(num[i]) * Math.Pow(Base, degrees);
+            degrees--;
+        }
+    }
+    else
+    {
+        for(int i = 0; i < num.Length; i++)
+        switch(num[i].ToString().ToUpper())
+        {
+            case ("F"):
+                result += 15 * Math.Pow(Base, degrees);
+                degrees--;
+                break;
+            case "E":
+                result += 14 * Math.Pow(Base, degrees);
+                degrees--;
+                break;
+            case "D":
+                result += 13 * Math.Pow(Base, degrees);
+                degrees--;
+                break;
+            case "C":
+                result += 12 * Math.Pow(Base, degrees);
+                degrees--;
+                break;
+            case "B":
+                result += 11 * Math.Pow(Base, degrees);
+                degrees--;
+                break;
+            case "A":
+                result += 10 * Math.Pow(Base, degrees);
+                degrees--;
+                break;
+            default:
+                result += char.GetNumericValue(num[i]) * Math.Pow(Base, degrees);
+                degrees--;
+                break;
+        }
+        
+    }
 
-if(basement == 2 || basement == 8)
-    Console.WriteLine($"{DecToBinOct(number, basement)}");
-else 
-    if(basement == 16)
-        Console.WriteLine($"{DecToHex(number, basement)}");
+    return result;
+}
+
+void fromDecChoice()
+{
+    Console.Write("Input a number to convert: ");
+    int number = Convert.ToInt32(Console.ReadLine());
+    Console.Write("Input a base (2, 8, 16): ");
+    int basement = Convert.ToInt32(Console.ReadLine());
+
+    if(basement == 2 || basement == 8)
+        Console.WriteLine($"{DecToBinOct(number, basement)}");
+    else 
+        if(basement == 16)
+            Console.WriteLine($"{DecToHex(number, basement)}");
+    else
+        Console.WriteLine("Wrong base");
+}
+
+void toDecChoice()
+{
+    Console.Write("Input a base (2, 8, 16): ");
+    int basement = Convert.ToInt32(Console.ReadLine());
+    Console.Write("Input a number to convert: ");
+    string number = Console.ReadLine();
+    if(basement == 2 || basement == 8 || basement == 16)
+        Console.WriteLine($"{ToDecimal(number, basement)}");
+    else
+        Console.WriteLine("Wrong base");
+}
+
+
+
+string way = string.Empty;
+Console.Write("Choose a way fromDec/toDec: ");
+way = Console.ReadLine().ToLower();
+if(way == "fromdec")
+    fromDecChoice();
 else
-    Console.WriteLine("Wrong base");
+    if(way == "todec")
+        toDecChoice();
+else
+    Console.WriteLine("No such way available");
