@@ -56,7 +56,8 @@ int basement = Convert.ToInt32(Console.ReadLine());
 
 if(basement == 2 || basement == 8)
     Console.WriteLine($"{DecToBinOct(number, basement)}");
-else if(basement == 16)
-    Console.WriteLine($"{DecToHex(number, basement)}");
+else 
+    if(basement == 16)
+        Console.WriteLine($"{DecToHex(number, basement)}");
 else
     Console.WriteLine("Wrong base");
