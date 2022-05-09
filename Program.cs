@@ -130,14 +130,20 @@ void toDecChoice()
 }
 
 
+Console.WriteLine("Greetings!\nThis is a connverter from Decimal to Binary/Octal/Hexadecimal and back.\n");
 
 string way = string.Empty;
-Console.Write("Choose a way fromDec/toDec: ");
-way = Console.ReadLine().ToLower();
-if(way == "fromdec")
-    fromDecChoice();
-else
-    if(way == "todec")
-        toDecChoice();
-else
-    Console.WriteLine("No such way available");
+while(way != "fromdec" || way != "todec")
+{
+    Console.Write("Choose a direction fromDec/toDec (or 'q' to exit): ");
+    way = Console.ReadLine().ToLower();
+    if(way == "fromdec")
+        fromDecChoice();
+    else
+        if(way == "todec")
+            toDecChoice();
+    else
+        if(way == "q") break;
+    else
+        Console.WriteLine("No such direction available. Try again please.");
+}
