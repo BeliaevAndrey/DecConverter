@@ -8,4 +8,6 @@
 # Ignoring directories
 */obj
 */bin
+obj/
+bin/
 .vscode
