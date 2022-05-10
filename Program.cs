@@ -10,40 +10,15 @@
     return result;
 }
 
-// 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
-// 0 1 2 3 4 5 6 7 8 9 A  B  C  D  E  F
-
 string DecToHex(int num, int Base)
 {
     string result = string.Empty;
+    string[] hexAlphabet = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"};
     while(num > 0)
     {
         int digit = num % Base;
-
-        switch(digit)
-        {
-            case 15:
-                result = "F" + result;
-                break;
-            case 14:
-                result = "E" + result;
-                break;
-            case 13:
-                result = "D" + result;
-                break;
-            case 12:
-                result = "C" + result;
-                break;
-            case 11:
-                result = "B" + result;
-                break;
-            case 10:
-                result = "A" + result;
-                break;
-            default:
-                result = Convert.ToString(digit) + result;
-                break;
-        }
+        result = hexAlphabet[digit] + result;
+        
         num /= Base;
     }
     return result;
@@ -63,37 +38,17 @@ double ToDecimal(string num, int Base)
     }
     else
     {
+        string[] hexAlphabet = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"};
         for(int i = 0; i < num.Length; i++)
-        switch(num[i].ToString().ToUpper())
         {
-            case ("F"):
-                result += 15 * Math.Pow(Base, degrees);
-                degrees--;
-                break;
-            case "E":
-                result += 14 * Math.Pow(Base, degrees);
-                degrees--;
-                break;
-            case "D":
-                result += 13 * Math.Pow(Base, degrees);
-                degrees--;
-                break;
-            case "C":
-                result += 12 * Math.Pow(Base, degrees);
-                degrees--;
-                break;
-            case "B":
-                result += 11 * Math.Pow(Base, degrees);
-                degrees--;
-                break;
-            case "A":
-                result += 10 * Math.Pow(Base, degrees);
-                degrees--;
-                break;
-            default:
-                result += char.GetNumericValue(num[i]) * Math.Pow(Base, degrees);
-                degrees--;
-                break;
+            for(int j = 0; j < 16; j++)
+            {
+                if(num[i].ToString().ToUpper() == hexAlphabet[j])
+                {
+                    result += j * Math.Pow(Base, degrees);
+                    degrees--;
+                }
+            }
         }
         
     }
